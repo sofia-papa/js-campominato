@@ -18,12 +18,21 @@
     // **** Creo una variable di appoggio per il punteggio
 
 
-    let numeriCasuali = [];
+    let numeriCasualiBombe = [];
+    let numeriCasualiUtente = [];
 
-    while (numeriCasuali.length < 16 ){
-            numeriCasuali.push(getRandomInt(1,100));
-        }
-        console.log(numeriCasuali);
+    let punteggio = 0;
+     
+    let i = 0
+    while (numeriCasualiBombe.length < 16){
+        i++;
+        let num = getRandomInt(1,100);
+
+       if (!numeriCasualiBombe.includes(num)){
+            numeriCasualiBombe.push(num)
+       }       
+    }
+        console.log(numeriCasualiBombe);
     
     
     //funzione per ottenere un numero randomico 
@@ -33,6 +42,7 @@
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
 
+   /* if (numeriCasualiBombe.includes) */
 
     // # GAMEPLAY
     // 1) Chiedere un numero all'utente
@@ -40,6 +50,14 @@
     // 3) Controllo se per caso lo aveva già scelto (è già presente nell'array dei numeri scelti dall'utente)
     // 4) Se il numero non è esplosivo e non è stato scelto, lo aggiungo nell'array dei numeri scelti
     //  
+
+    let numeroUtente = parseInt (prompt("inserisci un numero"));
+
+    
+
+    
+
+
 
     // # ENDGAME
     // a. Stampiamo il messaggio di alert del gioco (se hai vinto o perso)
