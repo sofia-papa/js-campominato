@@ -18,17 +18,19 @@
     // **** Creo una variable di appoggio per il punteggio
 
 
-    let numeriCasualiBombe = [];
-    let numeriCasualiUtente = [];
-
+    let numeriCasualiBombe = [];  //array di bombe
+    let numeriCasualiUtente = [];   //array scelte utente 
+    const numeroBombe = 8;
+    let numeroRandomicoMassimo = 20;                           
+    const tentativi = numeroRandomicoMassimo - numeroBombe;  //numeri di tentativi lasciati all'utente
     let punteggio = 0;
      
     let i = 0
-    while (numeriCasualiBombe.length < 16){
+    while (numeriCasualiBombe.length < numeroBombe){ 
         i++;
-        let num = getRandomInt(1,100);
+        let num = getRandomInt(1,numeroRandomicoMassimo);
 
-       if (!numeriCasualiBombe.includes(num)){
+       if (!numeriCasualiBombe.includes(num)){ // i numeri non devono ripetersi 
             numeriCasualiBombe.push(num)
        }       
     }
@@ -42,8 +44,6 @@
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
 
-   /* if (numeriCasualiBombe.includes) */
-
     // # GAMEPLAY
     // 1) Chiedere un numero all'utente
     // 2) Controllare che il numero non sia presente nell'array di bombe !!! ALTRIMENTI KABOOM
@@ -51,14 +51,36 @@
     // 4) Se il numero non è esplosivo e non è stato scelto, lo aggiungo nell'array dei numeri scelti
     //  
 
+   while (numeriCasualiUtente.length < tentativi){
     let numeroUtente = parseInt (prompt("inserisci un numero"));
+    while (numeroUtente < 1 || numeroUtente > numeroRandomicoMassimo || isNaN(numeroUtente) ||
+     (numeriCasualiUtente.includes(numeroUtente) == true)){
+        
+        if (numeriCasualiUtente.includes(numeroUtente) == true){
+            numeroUtente = parseInt (prompt("numero già inserito! riprova"));
+        } else if (numeroUtente < 1 || numeroUtente > numeroRandomicoMassimo) {
+            numeroUtente = parseInt (prompt("sei fuori dall'intervallo! riprova"));
+        } else {
+            numeroUtente = parseInt (prompt("numero non valido! riprova"));
+        }
+    }
 
-    
+    if (numeriCasualiBombe.includes(numeroUtente)){ //se l'utente ha scelto un numero 
+        alert ("hai perso");                        //all'interno della lista #numeriCasualiBombe --> perde
+        numeriCasualiUtente.length = tentativi;     // ALTRIMENTI, il numero viene aggiunto nella lista dell'utente
+    } else {
+        numeriCasualiUtente.push(numeroUtente);
+        if (numeriCasualiUtente.length == tentativi){
+            alert ("hai vinto!")
+        }
+      } 
+   } 
 
-    
-
-
+   console.log(numeriCasualiUtente);
 
     // # ENDGAME
     // a. Stampiamo il messaggio di alert del gioco (se hai vinto o perso)
     // b. Stampiamo il punteggio del giocatore
+
+
+    
