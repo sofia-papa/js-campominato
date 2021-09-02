@@ -18,32 +18,13 @@
     // **** Creo una variable di appoggio per il punteggio
 
 
-    let numeriCasualiBombe = [];  //array di bombe
     let numeriCasualiUtente = [];   //array scelte utente 
     const numeroBombe = 8;
-    let numeroRandomicoMassimo = 20;                           
+    let numeroRandomicoMassimo = 20;  
+    let numeriCasualiBombe = getArrayBombe(numeroBombe, numeroRandomicoMassimo);  //array di bombe                         
     const tentativi = numeroRandomicoMassimo - numeroBombe;  //numeri di tentativi lasciati all'utente
-    let punteggio = 0;
      
-    let i = 0
-    while (numeriCasualiBombe.length < numeroBombe){ 
-        i++;
-        let num = getRandomInt(1,numeroRandomicoMassimo);
-
-       if (!numeriCasualiBombe.includes(num)){ // i numeri non devono ripetersi 
-            numeriCasualiBombe.push(num)
-       }       
-    }
-        console.log(numeriCasualiBombe);
     
-    
-    //funzione per ottenere un numero randomico 
-    function getRandomInt(min,max){
-        min = Math.ceil(min);
-        max = Math.floor(max);
-        return Math.floor(Math.random() * (max - min + 1)) + min;
-    }
-
     // # GAMEPLAY
     // 1) Chiedere un numero all'utente
     // 2) Controllare che il numero non sia presente nell'array di bombe !!! ALTRIMENTI KABOOM
@@ -81,6 +62,27 @@
     // # ENDGAME
     // a. Stampiamo il messaggio di alert del gioco (se hai vinto o perso)
     // b. Stampiamo il punteggio del giocatore
+    
+    //funzione per ottenere un numero randomico 
+    function getRandomInt(min,max){
+        min = Math.ceil(min);
+        max = Math.floor(max);
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
 
+    function getArrayBombe (lunghezzaBombe, numeroRandomicoMax){
+        let bombe = [];
+        let i = 0
+        while (bombe.length < lunghezzaBombe){ 
+            i++;
+            let num = getRandomInt(1,numeroRandomicoMax);
+
+            if (!bombe.includes(num)){ // i numeri non devono ripetersi 
+                    bombe.push(num)
+            }       
+        }
+
+        return bombe;
+    }
 
     
